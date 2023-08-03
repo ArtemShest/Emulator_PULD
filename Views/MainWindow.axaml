@@ -1,0 +1,131 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Emulator_PULD.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="600"
+        x:Class="Emulator_PULD.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Emulator_PULD">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+  <Grid ColumnDefinitions="1, *, *">
+    <StackPanel Grid.Column="1">
+      <StackPanel Orientation="Horizontal">
+        <ComboBox Items="{Binding coms}" SelectedItem="{Binding selectedCom}">
+        </ComboBox>
+        <Button Content="Connect" Command="{Binding uart_connect}"/>
+      </StackPanel>
+
+      <Grid ColumnDefinitions="1, *, *">
+        
+          <ListBox Grid.Column="1" Grid.Row="0" Items="{Binding recieveMsg}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="{Binding dateTime}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[0]}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[1]}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[2]}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[3]}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[4]}" />
+                  <TextBlock Text="  " />
+                  <TextBlock Text="{Binding message[5]}" />
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        <ListBox Grid.Column="2" Grid.Row="0" Items="{Binding transmitMsg}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding dateTime}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[0]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[1]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[2]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[3]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[4]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[5]}" />
+                <TextBlock Text="  " />
+                <TextBlock Text="{Binding message[6]}" />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+      </Grid>
+    </StackPanel>
+
+    <StackPanel Grid.Column="2">
+      <RadioButton IsChecked="{Binding puld.preparation }"
+               GroupName="status"
+               Content="подготовка"/>
+      <RadioButton IsChecked="{Binding puld.ready }"
+               GroupName="status"
+               Content="готов"/>
+      <RadioButton IsChecked="{Binding puld.turnedOff }"
+               GroupName="status"
+               Content="выключен"/>
+      <RadioButton IsChecked="{Binding puld.turnedOn }"
+               GroupName="status"
+               Content="включен"/>
+      <RadioButton IsChecked="{Binding puld.overheatingLD }"
+               GroupName="status"
+               Content="перегрев ЛД"/>
+      <RadioButton IsChecked="{Binding puld.overcurrent }"
+               GroupName="status"
+               Content="перегрузка по току"/>
+      <RadioButton IsChecked="{Binding puld.breakage }"
+               GroupName="status"
+               Content="обрыв цепи"/>
+      <RadioButton IsChecked="{Binding puld.voltOverload }"
+               GroupName="status"
+               Content="перегрузка по напряжению"/>
+      <RadioButton IsChecked="{Binding puld.shortCircuit }"
+               GroupName="status"
+               Content="короткое замыкание"/>
+      <RadioButton IsChecked="{Binding puld.radiatorOverheating }"
+               GroupName="status"
+               Content="перегрев радиатора"/>
+      <RadioButton IsChecked="{Binding puld.radiatorTisBelowNormal }"
+               GroupName="status"
+               Content="Т радиатора ниже нормы"/>
+      <RadioButton IsChecked="{Binding puld.noConnectionToSubsystems }"
+               GroupName="status"
+               Content="нет связи с подсистемами"/>
+      <RadioButton IsChecked="{Binding puld.noConnectionToSubsystems }"
+               GroupName="status"
+               Content="сбой микросхемы Пельтье"/>
+      <RadioButton IsChecked="{Binding puld.PeltierChipFailure }"
+               GroupName="status"
+               Content="сбой микросхемы Пельтье"/>
+      <RadioButton IsChecked="{Binding puld.overheatingPeltier }"
+               GroupName="status"
+               Content="перегрев Пельтье"/>
+      <RadioButton IsChecked="{Binding puld.TLDisUnstable }"
+               GroupName="status"
+               Content="Т ЛД нестабильна"/>
+      <RadioButton IsChecked="{Binding puld.Tstove1_isUnstable }"
+               GroupName="status"
+               Content="Т печки 1 нестабильна"/>
+      <RadioButton IsChecked="{Binding puld.Tstove2_isUnstable }"
+               GroupName="status"
+               Content="Т печки 2 нестабильна"/>
+
+    </StackPanel>
+  </Grid>
+</Window>
